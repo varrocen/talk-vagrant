@@ -1,0 +1,192 @@
+= Vagrant
+:revealjs_theme: black
+:source-highlighter: highlightjs
+
+Create and configure lightweight, reproducible, and portable development environments.
+
+== About Me
+
+* Developer Java / PHP
+* Engineer at Sopra Steria
+* GitHub : https://github.com/varrocen
+* Twitter : https://twitter.com/varrocen[@varrocen]
+
+== About Vagrant
+
+* Vagrant is a tool for building development environments
+* Started in 2010 by Mitchell Hashimoto https://twitter.com/mitchellh[@mitchellh]
+* https://www.hashicorp.com/[HashiCorp] formed in 2012
+* Open Source Project (MIT license) on https://github.com/mitchellh/vagrant[GitHub]
+
+[NOTE.speaker]
+--
+* Au départ Vagrant est un projet personnel de Hashimoto
+* HashiCorp fournit du support, formations et plugin propriétaire pour Vagrant
+--
+
+== Why Vagrant ?
+
+* A single automated process for install the development environment for all projects
+* Same environments for each developer
+* Easy and fast to install:
+  ** Check out the source code
+  ** vagrant up (or push button)
+  ** Happy coding ! :)
+
+== Vagrantfile
+
+* Vagrantfile describes a virtual machine and how to configure and provision these machines
+* One Vagrantfile by project committed to version control
+* Vagrantfile is portable across every platform supported
+* The syntax of Vagrantfile is Ruby
+
+[NOTE.speaker]
+--
+* Aucune connaissance en Ruby est nécessaire
+--
+
+=== Configuration Version
+
+Configuration versions are the mechanism by which Vagrant 1.1+ is able to remain backwards compatible with 1.0.x:
+
+[source, language="ruby"]
+----
+Vagrant.configure("2") do |config|
+  # ...
+end
+----
+
+== Providers
+
+* VirtualBox (default)
+* VMware (requires the purchase of a license)
+* Docker ♥
+* Hyper-V (native hypervisor by Microsoft)
+* Custom provider
+
+[NOTE.speaker]
+--
+* Une boxe est spécifique à un provider mais deux boxes peuvent avoir le même nom si le provider est diffèrent
+* Vagrant détecte automatiquement le provider
+--
+
+=== Provider Configuration
+
+It possible to use provider-specific configuration:
+
+[source, language="ruby"]
+----
+# Provider configuration
+config.vm.provider :virtualbox do |vb|
+  vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+end
+----
+
+[NOTE.speaker]
+--
+* Le Vagrantfile reste portable les configurations spécifiques d'un provider sont ignorées si le provider n'est pas utilisé
+--
+
+== Boxes
+
+* Boxes are the package format for Vagrant environments
+* Boxes are available in public catalog: https://atlas.hashicorp.com/boxes/search[Altas]
+* Boxes support versioning
+
+=== Box File Format
+
+* Box File is a compressed file specific to a single provider
+* Box Metadata is a JSON document that specifies the box
+* Metadata is optional but allows versioning and multiple providers
+
+=== Creating a Base Box
+
+* Base Box is a box with the minimum required for Vagrant
+* Create "vagrant" user with root access
+* Root Password: "vagrant"
+* Vagrant boxes are insecure by design
+
+== Provisioning
+
+* Vagrant allows to automatically install software or alter configurations
+* File and/or Shell
+* Configuration management system:
+  ** Ansible, CFEngine, Chef, Puppet and Salt
+* Docker ♥
+
+== Networking
+
+* Vagrant exposes some high-level networking options
+* A level of abstraction that works regardless of the provider
+* Private Networks, Public Networks and Forwarded Ports
+
+== Synced folders
+
+* Sync a folder on the host machine to the guest machine
+* NFS (Linux host only)
+* RSync (high performance but rsync does one-time one-way sync)
+* SMB (MS Windows host only)
+* VirtualBox (poor performance)
+
+=== VirtualBox bug
+
+In Nginx:
+
+----
+sendfile off;
+----
+
+In Apache:
+
+----
+EnableSendfile Off
+----
+
+[NOTE.speaker]
+--
+* Il y a un bug avec le dossier synchronisé de VirtualBox qui empêche la mise à jour des fichiers
+--
+
+== Debugging
+
+Enable detailed logging:
+
+[source, language="bash"]
+----
+$ set VAGRANT_LOG=info
+$ vagrant up
+----
+
+or
+
+[source, language="bash"]
+----
+$ vagrant up --debug
+----
+
+== Other features
+
+* Multiple machines
+* Vagrant Push
+* Vagrant Share
+* Plugins
+
+[NOTE.speaker]
+--
+* Vagrant Push : déployer son application sur un serveur FTP / FTPS
+* Vagrant Share : partager sa VM sur Internet
+--
+
+== The future of Vagrant
+
+[%step]
+* Otto the successor to Vagrant
+* Otto automatically builds your development environment
+* Otto creates your base infrastructure
+* Otto builds and deploys your application
+
+[NOTE.speaker]
+--
+* Otto ne remplace pas Vagrant car il est basé sur Vagrant
+* HashiCorp est persuadé que les développeurs abandonneront Vagrant pour Otto
+--
