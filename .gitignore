@@ -1,0 +1,4 @@
+.vagrant/
+asciidoctor-reveal.js/
+reveal.js/
+vagrant.html
