@@ -7,6 +7,7 @@ Requirements
 
 * Asciidoctor
 * Vagrant
+* VirtualBox
 
 Build with Asciidoctor
 ----------------------
