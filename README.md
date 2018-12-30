@@ -32,7 +32,7 @@ Run:
 
 	vagrant up
 
-Go to http://127.0.0.1:4567/vagrant.html.
+Go to http://127.0.0.1:8080/vagrant.html.
 
 Configure your corporate proxy
 ------------------------------

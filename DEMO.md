@@ -24,7 +24,7 @@ See synced folder:
     ls /vagrant
     touch /vagrant/foo
 
-Go to http://127.0.0.1:4567/vagrant.html.
+Go to http://127.0.0.1:8080/vagrant.html.
 
 Halt and destroy:
 
