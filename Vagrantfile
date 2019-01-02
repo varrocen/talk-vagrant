@@ -1,6 +1,6 @@
 Vagrant.configure(2) do |config|
   # Machine Settings
-  config.vm.box = "ubuntu/trusty64"
+  config.vm.box = "bento/ubuntu-18.04"
   # Private Networks
   config.vm.network :forwarded_port, guest: 80, host: 8080
   # Provisioning
